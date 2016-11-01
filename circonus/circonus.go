@@ -55,6 +55,18 @@ func (s *CirconusSink) Flush() {
 	s.metrics.Flush()
 }
 
+// AddMetricTags appends a tag to a specific metric
+func (s *CirconusSink) AddMetricTags(key []string, tags []string) bool {
+	metric := s.flattenKey(key)
+	return s.metrics.AddMetricTags(metric, tags)
+}
+
+// SetMetricTags sets a tag to a specific metric
+func (s *CirconusSink) SetMetricTags(key []string, tags []string) bool {
+	metric := s.flattenKey(key)
+	return s.metrics.SetMetricTags(metric, tags)
+}
+
 // SetGauge sets value for a gauge metric
 func (s *CirconusSink) SetGauge(key []string, val float32) {
 	flatKey := s.flattenKey(key)
